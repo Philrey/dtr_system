@@ -98,13 +98,13 @@
 				for($n=0;$n<sizeof($result);$n++){
 					echo '
 						<tr>
-							<td>'.$result[$n][0].'</td>
+							<td id="user'.$result[$n][0].'">'.$result[$n][0].'</td>
 							<td>'.$result[$n][1].'</td>
 							<td>'.$result[$n][2].'</td>
 							<td>
 								<form method="post" action="userManagement.php">
-									<input type="number" name="uId" value="'.$result[$n][0].'"> 
-									<button type="submit" name="submit" value="editUser">Edit</button>
+									<input style="display:none;" type="number" name="uId" value="'.$result[$n][0].'"> 
+									<button type="button" name="submit" value="editUser">Edit</button>
 									<button type="submit" name="submit" value="viewUser">View Records</button>
 									<button type="submit" name="submit" value="deleteUser">Delete</button>
 								</form>
