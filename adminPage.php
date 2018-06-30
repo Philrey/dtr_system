@@ -37,7 +37,7 @@
 			height: 100%;
 		}
 		#addForm {
-			width: 25%;
+			width : 25%;
 			height: 40%;
 			border: 3px solid #73AD21;
 			padding: 10px; z-index: 1;
@@ -55,7 +55,7 @@
 	<script src="script_functions.js"></script>
 	<!--Add Item Form-->
 		<div id="bg" style="display: none;"></div>
-		<div id="addForm"  style="display:none; z-index: 2;"> 
+		<div id="addForm"  style="display:none; z-index: 2;">
 			<button onclick="changeDisplay('addForm','none');changeDisplay('bg','none')"> X </button>
 			<p>
 			<form method="POST" action="addUser.php">
@@ -75,7 +75,7 @@
 		<h2>Welcome Admin</h2>
 		
 		<!--Admin Controls-->
-		<button id="addBtn" onclick="changeDisplay('addForm','block');changeDisplay('bg','block')">Add New User</button>
+		<button id="addBtn" onclick="changeDisplay('addForm','block');changeDisplay('bg','block');">Add New User</button>
 		<button type="button" id="viewBtn" onclick="">View All Records</button>
 		
 		<!--Search and Filters-->

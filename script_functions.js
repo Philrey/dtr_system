@@ -19,8 +19,4 @@ function addUnit(idName,newValue){
 	var inp = document.getElementById(idName);
 	inp.value = newValue;
 }
-function noSubmit(idName){
-	document.getElementById(idName).addEventListener("click", function(event){
-		event.preventDefault()
-	});
-}
+
