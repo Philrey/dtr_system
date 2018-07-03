@@ -2,9 +2,7 @@
 	include("functions.php");
 	
 	if(isset($_POST['submit'])){
-		if($_POST['submit']=='viewUser'){
-			//Redirect to User Details page
-		}
+		
 		if($_POST['submit']=='deleteUser'){
 			//Execute query
 			$result = delete_values("users","u_id='".$_POST['uId']."'");

@@ -57,7 +57,7 @@
                         break;
                     }
 					case 2:{
-                        
+                        $cLine []=array( $row['r_id'] , $row['u_id'] , $row['r_date'] , $row['r_time1'] , $row['r_time2'] , $row['r_time3'] , $row['r_time4'] );
                         break;
                     }
                 }
@@ -125,9 +125,9 @@
         }
     }
 	
-	function getDateNow(){
+	function getDateNow($start,$length){
 		$conn = connect_to_database('localhost','root','','dtr_db',true);
-        $query="select substr(now(),1,10) as dateNow";
+        $query="select substr(now(),".$start.",".$length.") as dateNow";
         //echo $query;
         $result = mysqli_query($conn,$query);
         if(!$result){

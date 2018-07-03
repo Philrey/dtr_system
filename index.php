@@ -11,7 +11,7 @@
 	<div>
 		<h2>DTR System v1.0</h2>
 		
-		<form method="POST" action="">
+		<form method="POST" action="timeIn.php">
 			<input type="text" name="uPin" placeholder="Enter User Pin">
 			<button type="submit" name="submit" value="timeIn">TIME IN</button>
 		</form>
