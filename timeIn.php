@@ -11,6 +11,8 @@
 				$Passed = TRUE;
 			}else{
 				echo "User Does Not Exist";
+				echo '<meta http-equiv="refresh" content="5; URL=index.php">
+				<meta name="keywords" content="automatic redirection">';
 			}
 			//Check records table if the current date exists, else create a new record
 			if($Passed){
@@ -20,6 +22,7 @@
 					$toUpdate = 'r_time';
 					$timeFull = TRUE;
 					
+					//check the timeN columns if there is an empty slot and insert the current time,
 					for($n=4;$n<7;$n++){
 						if($record[0][$n]=="00:00:00"){
 							$toUpdate .= ($n - 2);
@@ -48,7 +51,7 @@
 			}else{
 				
 			}
-			//check the timeN columns if there is an empty slot and insert the current time,
+			
 				//else prompt user that they have submitted the max entry for this date
 			//Redirect to index
 		}

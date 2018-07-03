@@ -60,6 +60,10 @@
                         $cLine []=array( $row['r_id'] , $row['u_id'] , $row['r_date'] , $row['r_time1'] , $row['r_time2'] , $row['r_time3'] , $row['r_time4'] );
                         break;
                     }
+					case 3:{
+                        $cLine []=array( $row['r_id'] , $row['r_date'] , $row['u_id'] , $row['u_name'] , $row['r_time1'] , $row['r_time2'] , $row['r_time3'] , $row['r_time4'] );
+                        break;
+                    }
                 }
             }
             //4. Release Data From Result
