@@ -19,4 +19,15 @@ function addUnit(idName,newValue){
 	var inp = document.getElementById(idName);
 	inp.value = newValue;
 }
+function redirectPage(idName,newPage){
+	var inp = document.getElementById(idName);
+	location.href = newPage;
+}
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;     
+	var originalContents = document.body.innerHTML;  
+	document.body.innerHTML = printContents;      
+	window.print();      
+	document.body.innerHTML = originalContents;
+   }
 

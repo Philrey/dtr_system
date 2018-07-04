@@ -64,6 +64,10 @@
                         $cLine []=array( $row['r_id'] , $row['r_date'] , $row['u_id'] , $row['u_name'] , $row['r_time1'] , $row['r_time2'] , $row['r_time3'] , $row['r_time4'] );
                         break;
                     }
+					case 4:{
+                        $cLine []=array( $row['r_date'] );
+                        break;
+                    }
                 }
             }
             //4. Release Data From Result
@@ -150,4 +154,19 @@
             
         return $cLine[0][0];
     }
+	function to24Hour($from12Hour){
+		$result = date( "H:i:s", strtotime($from12Hour) );
+		return $result;
+	}
+	function to12Hour($from24Hour){
+		$result = date( "g:i:s a", strtotime($from24Hour) );
+		return $result;
+	}function toNumberDate($from24Hour){
+		$result = date( "Y-m-d", strtotime($from24Hour) );
+		return $result;
+	}
+	function toWordDate($from24Hour){
+		$result = date( "F d, Y", strtotime($from24Hour) );
+		return $result;
+	}
 ?>

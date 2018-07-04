@@ -24,7 +24,7 @@
 					
 					//check the timeN columns if there is an empty slot and insert the current time,
 					for($n=4;$n<7;$n++){
-						if($record[0][$n]=="00:00:00"){
+						if($record[0][$n]=="NULL" || $record[0][$n]==""){
 							$toUpdate .= ($n - 2);
 							$timeFull = FALSE;
 							break;
@@ -46,7 +46,8 @@
 							"u_id,r_date,r_time1",
 							"'".$user[0][0]."' , '".getDateNow(1,10)."' , '".getDateNow(12,8)."'");
 					//redirect to index page
-					
+					echo '<meta http-equiv="refresh" content="0; URL=index.php">
+					<meta name="keywords" content="automatic redirection">';
 				}
 			}else{
 				

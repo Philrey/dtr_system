@@ -10,9 +10,6 @@
 							
 							,"r_id = '".$_POST['rId']."'");
 		}
-	}else{
-		echo '<meta http-equiv="refresh" content="0; URL=index.php">
-		<meta name="keywords" content="automatic redirection">';
 	}
 ?>
 
@@ -51,23 +48,49 @@
 			width: 100%;
 			text-align: center;
 		}
+		#signatures {
+			display: none;
+		}
+		#header {
+			display: none;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+	@media print{
 		.toHide {
-			display:block;
+			display: none;
 		}
-		@media print{
-			.toHide {
-				display:none;
-			}
+		.toShow {
+			display: block;
 		}
+		#header {
+			display: block;
+		}
+	}
 	</style>
 	<script src="script_functions.js">
 	</script>
-	
 	<body>
+		<div class="toHide">
+		
 		<button type="button" id="viewBtn" onclick="redirectPage('viewBtn','adminPage.php');">Back To Admin Page</button>
-		<h2 class="toHide">View Records</h2>
 		
 		
+		<h2>View Records</h2>
+		
+		<!--Filters-->
+		<form method="POST" action="">
+			<h3>From</h3>
+				<input type="date" name="dateFrom">
+			<h3>To</h3>
+				<input type="date" name="dateTo">
+			<br>
+			<button type="submit" name="submit" value="filtered">Search</button>
+		</form>
+		</div>
+		
+		<img id="header" src="Header.png">
 		
 		<table width="99%" border="0" style="text-align: center;">
 			<!--Update Record-->
@@ -97,10 +120,16 @@
 					</p>
 				</div>
 			
-			
 			<!--Columns-->
 			<tr>
-				<th>Date</th>	<th>Log In</th>	<th>Log Out</th>	<th>Log In</th>	<th>Log Out</th>	<th>Actions</th>
+				<th>Date</th>
+				<th>User Name</th>
+				<th>Log In</th>
+				<th>Log Out</th>
+				<th>Log In</th>
+				<th>Log Out</th>
+				<th>Signature</th>
+				<th class="toHide">Actions</th>
 			</tr>
 			
 			
@@ -108,39 +137,65 @@
 			<!--Rows-->
 			<?php
 				//Filters
-				$filters = "ORDER BY r_date DESC";
+				$filters = '';
+				if(isset($_POST['submit'])){
+					if($_POST['submit']=='filtered'){
+						if(strlen($_POST['dateFrom'])>=10){
+							$filters.= "where (r_date >='".toWordDate($_POST['dateFrom'])."') ";
+						}
+						if(strpos($filters,"where ")!==FALSE){
+							if(strlen($_POST['dateTo'])>=10){
+								$filters .= "&& (r_date <= '".toWordDate($_POST['dateTo'])."') ";
+							}
+						}else{
+							if(strlen($_POST['dateTo'])>=10){
+								$filters .= "where (r_date <= '".toWordDate($_POST['dateTo'])."')";
+							}
+						}
+					}
+				}
 				
-				$result = return_values("*","dtr_view","where u_id='".$_POST['uId']."' ".$filters,3);
+				$filters .= "ORDER BY r_date DESC";
+				
+				$result = return_values("distinct(r_date)","dtr_view","".$filters,4);
 				
 				for($n=0;$n<sizeof($result);$n++){
 					//Column Data
 					echo '
 						<tr>
-							<td>'.$result[$n][1].'</td>
-						</tr>
-						<tr>
+							<td>'.$result[$n][0].'</td>
+						</tr>';
+					
+					$users = return_values("*","dtr_view","where r_date = '".$result[$n][0]."' ORDER BY r_id ASC",3);
+					
+					for($x=0;$x<sizeof($users);$x++){
+						echo '<tr>
 							<td></td>
-										<td>'.$result[$n][4].'</td>
-										<td>'.$result[$n][5].'</td>
-										<td>'.$result[$n][6].'</td>
-										<td>'.$result[$n][7].'</td>
+										<td>'.$users[$x][3].'</td>
 										
+										<td>'.$users[$x][4].'</td>
+										<td>'.$users[$x][5].'</td>
+										<td>'.$users[$x][6].'</td>
+										<td>'.$users[$x][7].'</td>
+										<td></td>
 										<td class="toHide">
 											<button type="button" id="addBtn" 
 											onclick="
 												changeDisplay(\'addForm\',\'block\');
 												changeDisplay(\'bg\',\'block\');
-												addUnit(\'rId\',\''.$result[$n][0].'\');
-												addUnit(\'uId\',\''.$result[$n][2].'\');
-												addUnit(\'uName\',\''.$result[$n][3].'\');
-												addUnit(\'t1\',\''.$result[$n][4].'\');
-												addUnit(\'t2\',\''.$result[$n][5].'\');
-												addUnit(\'t3\',\''.$result[$n][6].'\');
-												addUnit(\'t4\',\''.$result[$n][7].'\');
+												addUnit(\'rId\',\''.$users[$x][0].'\');
+												addUnit(\'uId\',\''.$users[$x][2].'\');
+												addUnit(\'uName\',\''.$users[$x][3].'\');
+												addUnit(\'t1\',\''.$users[$x][4].'\');
+												addUnit(\'t2\',\''.$users[$x][5].'\');
+												addUnit(\'t3\',\''.$users[$x][6].'\');
+												addUnit(\'t4\',\''.$users[$x][7].'\');
 											">Edit</button>
 										</td>
-						</tr>
+							</tr>
 					';
+					}
+					
 				}
 			?>
 			

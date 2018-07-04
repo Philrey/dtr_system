@@ -76,7 +76,7 @@
 		
 		<!--Admin Controls-->
 		<button id="addBtn" onclick="changeDisplay('addForm','block');changeDisplay('bg','block');">Add New User</button>
-		<button type="button" id="viewBtn" onclick="">View All Records</button>
+		<button type="button" id="viewBtn" onclick="redirectPage('viewBtn','viewAll.php');">View All Records</button>
 		
 		<!--Search and Filters-->
 		
